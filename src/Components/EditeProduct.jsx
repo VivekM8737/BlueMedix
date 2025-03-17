@@ -4,18 +4,17 @@ import axios from 'axios';
 
 const EditProduct = ({products,setProducts}) => {
   const { id } = useParams();
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState('t');
   const [description, setDescription] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios.get(`'https://fakestoreapi.com/products/'${id}`)
-      .then(response => {
-        setTitle(response.data.title);
-        setDescription(response.data.description);
-      })
-      .catch(error => console.error('Error fetching user details:', error));
-  }, [id]);
+   useEffect(() => {
+      const product = products.find(product => product.id === parseInt(id));
+      if (product) {
+        setTitle(product.title);
+        setDescription(product.description);
+      }
+    }, [id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,11 +24,27 @@ const EditProduct = ({products,setProducts}) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="title" className="border p-2" />
-      <input type="text" value={description} onChange={e => setDescription(e.target.value)} placeholder="description" className="border p-2" />
-      <button type="submit" className="bg-blue-500 text-white p-2">Edit User</button>
-    </form>
+    <> 
+      <div className='flex  font-mono justify-center items-center '>
+
+      <div className=' margin-auto border-2 rounded-lg p-4'>
+        <h2><b>Title:</b> {title}</h2>
+        <p className='text-sm'><b>Description:</b> {description}</p>
+        {/* <button 
+      onClick={() => setShowModal(true)}
+      className="bg-blue-500 text-white text-sm p-1 rounded mb-2 my-2"
+      >
+        Edit User
+      </button> */}
+      
+    </div>
+    </div>
+      {/* <form onSubmit={handleSubmit} className="space-y-4">
+        <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="title" className="border p-2" />
+        <input type="text" value={description} onChange={e => setDescription(e.target.value)} placeholder="description" className="border p-2" />
+        <button type="submit" className="bg-blue-500 text-white p-2">Edit User</button>
+      </form> */}
+    </>
   );
 };
 

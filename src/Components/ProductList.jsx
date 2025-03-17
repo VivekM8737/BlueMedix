@@ -17,6 +17,7 @@ const ProductList = ({products,setProducts}) => {
 
   return (
     <>
+    
       <h1 className="text-xl mb-4">products List</h1>
       <ul>
         {products.map(product => (

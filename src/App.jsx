@@ -38,6 +38,7 @@ const App = () => {
                 <Route path="/users" element={<UsersList users={users} setUsers={setUsers}/>} />
                 <Route path="/users/:id" element={<EditUser users={users} setUsers={setUsers} />} />
                 <Route path="/AddUser" element={<AddUser users={users} setUsers={setUsers}/>} />
+                
                 <Route path="/products" element={<ProductList products={products} setProducts={setproducts}/>} />
                 <Route path="/products/:id" element={<EditProduct  products={products} setProducts={setproducts}/>} />
                 <Route path="/add-product" element={<AddProduct  products={products} setProducts={setproducts}/>} />
