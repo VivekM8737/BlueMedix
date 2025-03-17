@@ -9,7 +9,7 @@ const EditProduct = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`'https://fakestoreapi.com/products/1'${id}`)
+    axios.get(`'https://fakestoreapi.com/products/'${id}`)
       .then(response => {
         setTitle(response.data.title);
         setDescription(response.data.description);
@@ -19,8 +19,7 @@ const EditProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username);
-    axios.put(`https://fakestoreapi.com/product/${id}`, { title, description })
+    axios.put(`https://fakestoreapi.com/products/${id}`, { title, description })
       .then(() => navigate('/product'))
       .catch(error => console.error('Error updating user:', error));
   };

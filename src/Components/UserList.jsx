@@ -2,25 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const UsersList = () => {
-    const [users, setUsers] = useState([]);
+const UsersList = ({users,setUsers}) => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-
-    useEffect(() => {
-        if (users.length === 0) {  // Only fetch if users are not already loaded
-          axios.get('https://fakestoreapi.com/users')
-            .then(response => setUsers(response.data))
-            .catch(error => console.error('Error fetching users:', error));
-        }
-      }, [users, setUsers]);
-
   const deleteUser = (id) => {
-    axios.delete(`https://fakestoreapi.com/users/${id}`)
-      .then(() => setUsers(users.filter(user => user.id !== id)))
-      .catch(error => console.error('Error deleting user:', error));
+    let x=confirm("Are you want to delete it?");
+    if(x===true){
+
+      axios.delete(`https://fakestoreapi.com/users/${id}`)
+        .then(() => setUsers(users.filter(user => user.id !== id)))
+        .catch(error => console.error('Error deleting user:', error));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -49,7 +43,7 @@ const UsersList = () => {
         {users.map(user => (
           <li key={user.id} className="flex justify-between mb-2">
             <Link to={`/users/${user.id}`}>{user.username}</Link>
-            <button onClick={() => deleteUser(user.id)} className="text-red-500">Delete</button>
+            <button onClick={() => deleteUser(user.id)} className="text-red-500 font-mono rounded-lg bg-sky-500/50 p-1">Delete</button>
           </li>
         ))}
       </ul>

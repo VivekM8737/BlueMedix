@@ -18,9 +18,13 @@ const ProductList = () => {
       }, [products, setproducts]);
 
   const deleteProduct = (id) => {
-    axios.delete(`https://fakestoreapi.com/products/${id}`)
-      .then(() => setproducts(products.filter(product => product.id !== id)))
-      .catch(error => console.error('Error deleting user:', error));
+    const x=confirm("Are you want to delet?");
+    if(x===true){
+
+      axios.delete(`https://fakestoreapi.com/products/${id}`)
+        .then(() => setproducts(products.filter(product => product.id !== id)))
+        .catch(error => console.error('Error deleting user:', error));
+    }
   };
 
 //   const handleSubmit = async (e) => {
@@ -49,7 +53,7 @@ const ProductList = () => {
         {products.map(product => (
           <li key={product.id} className="flex justify-between mb-2">
             <Link to={`/products/${product.id}`}>{product.title}</Link>
-            <button onClick={() => deleteProduct(product.id)} className="text-red-500">Delete</button>
+            <button onClick={() => deleteProduct(product.id)} className="text-red-500 font-mono rounded-lg bg-sky-500/50 p-1">Delete</button>
           </li>
         ))}
       </ul>
