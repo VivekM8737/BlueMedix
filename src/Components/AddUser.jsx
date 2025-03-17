@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const AddUser = () => {
-    const [users, setUsers] = useState([]);
+const AddUser = ({users, setUsers}) => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -12,15 +11,17 @@ const AddUser = () => {
     e.preventDefault();
 
     try {
-        const userNew = { username: username, email: email, password: password };
-        fetch('https://fakestoreapi.com/users', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(userNew)
-        })
-          .then(response => response.json())
-          .then(data => console.log(data)); // Including username and email manually
+      const userNew = { username: username, email: email, password: password };
+      fetch('https://fakestoreapi.com/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userNew)
+      })
+        .then(response => response.json())
+        .then(data => console.log(data)); // Including username and email manually
+        console.log(username)
       setUsers([...users, userNew]); // Append new user to the list
+    // Append new user to the list
       navigate('/users');
     } catch (error) {
       console.error('Error adding user:', error);

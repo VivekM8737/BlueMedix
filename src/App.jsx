@@ -17,18 +17,19 @@ const App = () => {
             .then(response => setUsers(response.data))
             .catch(error => console.error('Error fetching users:', error));
         // }
-      }, []);
+      }, [setUsers]);
   return (
     <Router>
       <Navbar />
       <div className="min-h-screen bg-gray-100">
         <div className="p-4">
           <Card>
+            <h1 className='text-center'>Welcome to BlueMedix</h1>
             <CardContent>
               <Routes>
                 <Route path="/users" element={<UsersList users={users} setUsers={setUsers}/>} />
                 <Route path="/users/:id" element={<EditUser users={users} setUsers={setUsers} />} />
-                <Route path="/AddUser" element={<AddUser/>} />
+                <Route path="/AddUser" element={<AddUser users={users} setUsers={setUsers}/>} />
                 <Route path="/products" element={<ProductList/>} />
                 <Route path="/products/:id" element={<EditProduct/>} />
                 <Route path="/add-product" element={<div>Add Product Form</div>} />

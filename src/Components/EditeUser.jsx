@@ -42,23 +42,27 @@ const EditUser = ({ users, setUsers }) => {
 
   return (
     <>
-      <div className=''>
-        <h2>User: {username}</h2>
-        <h2>Name: {firstname}</h2>
-        <h2>Email: {email}</h2>
-        
-      </div>
-      <button 
+      <div className='flex  font-mono justify-center items-center '>
+
+        <div className=' margin-auto border-2 rounded-lg p-4'>
+          <h2>User: {username}</h2>
+          <h2>Name: {firstname}</h2>
+          <h2>Email: {email}</h2>
+          <button 
         onClick={() => setShowModal(true)}
-        className="bg-blue-500 text-white p-2 rounded mb-4"
-      >
-        Edit User
-      </button>
+        className="bg-blue-500 text-white text-sm p-1 rounded mb-2 my-2"
+        >
+          Edit User
+        </button>
+          
+        </div>
+      </div>
+      
 
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg w-96 shadow-lg">
-            <h2 className="text-xl font-bold mb-4">Edit User</h2>
+            <h3 className=" font-bold mb-4">Edit User</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <input 
                 type="text" 
