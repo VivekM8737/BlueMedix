@@ -21,8 +21,8 @@ const EditUser = ({ users, setUsers }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const updatedUser = { id: parseInt(id), username, email,firstname };
+    console.log(firstname)
+    const updatedUser = { id: parseInt(id), username:username, email,name:{firstname: firstname }};
 
     try {
       const response = await axios.put(`https://fakestoreapi.com/users/${id}`, updatedUser, {
@@ -32,8 +32,9 @@ const EditUser = ({ users, setUsers }) => {
       if (response.status === 200 || response.status === 201) {
         const updatedUsers = users.map(user => user.id === updatedUser.id ? updatedUser : user);
         setUsers(updatedUsers);
-        localStorage.setItem('users', JSON.stringify(updatedUsers));
+        // localStorage.setItem('users', JSON.stringify(updatedUsers));
         setShowModal(false);
+
       }
     } catch (error) {
       console.error('Error updating user:', error);
@@ -69,6 +70,13 @@ const EditUser = ({ users, setUsers }) => {
                 value={username} 
                 onChange={(e) => setUsername(e.target.value)} 
                 placeholder="Username" 
+                className="w-full p-2 border rounded"
+              />
+              <input 
+                type="text" 
+                value={firstname} 
+                onChange={(e) => setFirstName(e.target.value)} 
+                placeholder="FirstName" 
                 className="w-full p-2 border rounded"
               />
               <input 
